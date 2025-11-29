@@ -11,6 +11,7 @@ public class ApplicationTracker : MonoBehaviour
     public TMP_Text interviews; 
     public GameObject interviewMenuPanel;   // <-- ADD THIS
     public TimeTracker timeTracker;   // <-- ADD THIS
+    public PsychologicalState ps;
     private Button[] interviewTimes;              // list of all time buttons (9am - 5pm)
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -50,11 +51,14 @@ public class ApplicationTracker : MonoBehaviour
         if (interviewRand < 1.01f)
         {
             totalInterviews++;
+            ps.increment_health();
             interviewMenuPanel.SetActive(true);
         }
         else
         {
             totalRejections++;
+            ps.decrement_health();
+            
         } 
         rejections.text = "Rejections: " + totalRejections;
         interviews.text = "Interviews: " + totalInterviews;

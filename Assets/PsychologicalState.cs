@@ -1,27 +1,39 @@
 using UnityEngine;
+using TMPro;
 
 public class PsychologicalState : MonoBehaviour
 {
-    public int health = 100;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField] private int _health = 100;
 
-    void decrement_health()
+    public TMP_Text psyche;
+
+    public int Health
     {
-        health -= 10;
+        get => _health;
+        set
+        {
+            _health = value;
+            update_morale();
+        }
     }
-    void increment_health()
-    {
-        health += 10;
-        
-    }
+
     void Start()
     {
-        
+        update_morale();
     }
 
-    // Update is called once per frame
-    void Update()
+    void update_morale()
     {
-        
+        psyche.text = "Morale: " + _health;
+    }
+
+    public void decrement_health()
+    {
+        Health -= 10;  
+    }
+
+    public void increment_health()
+    {
+        Health += 10;    
     }
 }
